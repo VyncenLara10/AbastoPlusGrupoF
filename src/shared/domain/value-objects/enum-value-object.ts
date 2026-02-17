@@ -1,3 +1,5 @@
+import ValueObject from "./value-object";
+
 export default class EnumValueObject {
     private readonly value: string;
     private readonly validValues: string[];

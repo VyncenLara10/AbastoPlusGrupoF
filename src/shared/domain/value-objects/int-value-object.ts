@@ -1,3 +1,5 @@
+import ValueObject from "./value-object";
+
 export default class IntValueObject {
     
     private readonly value: number;

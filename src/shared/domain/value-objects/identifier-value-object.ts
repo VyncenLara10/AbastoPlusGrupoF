@@ -1,9 +1,9 @@
-export default class IdentifierValueObject {
-    private readonly value: string;
+import ValueObject from './value-object';
 
+export default class IdentifierValueObject extends ValueObject<string> {
     constructor(value: string) {
+        super(value);
         this.ensureValueIsUvid(value);
-        this.value = value;
     }
 
     ensureValueIsUvid(value: string): void {
