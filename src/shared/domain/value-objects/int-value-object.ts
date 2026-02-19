@@ -1,12 +1,9 @@
 import ValueObject from "./value-object";
 
-export default class IntValueObject {
-    
-    private readonly value: number;
-
-    constructor(value: number) {
-        this.ensureValueIsInt(value);
-        this.value = value;
+export default class IntValueObject extends ValueObject<string>{
+    constructor(value: string) {
+        super(value);
+        this.ensureValueIsInt(parseInt(value));
     }
     
     ensureValueIsInt(value: number): void {

@@ -1,9 +1,12 @@
 import EnumValueObject from '../../../../shared/domain/value-objects/enum-value-object';
 
 export enum BaseUnit {
-    OUNCE = 'ounce',
-    KILOGRAM = 'kilogram',
-    POUND = 'pound',
+    KILOGRAM = 'kg',
+    POUND = 'lb',
+    GRAM = 'g',
+    MILILITTER = 'ml',
+    LITTER = 'lt',
+    UNIDAD = 'u'
 }
 
 export default class ProductBaseUnit extends EnumValueObject {

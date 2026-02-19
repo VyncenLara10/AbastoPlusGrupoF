@@ -1,11 +1,11 @@
 import ValueObject from "./value-object";
 
-export default class EnumValueObject {
-    private readonly value: string;
+export default class EnumValueObject extends ValueObject<string>{
     private readonly validValues: string[];
-    
-    constructor(value: string, validValues: string[]) {
-        this.value = value;
+
+    constructor(value: string, validValues: string[]){
+        super(value);
+        this.ensureValueIsValid(value, validValues);
         this.validValues = validValues;
     }
 

@@ -1,8 +1,9 @@
-export default class StringValueObject {
-    private readonly value: string;
+import ValueObject from './value-object'
+
+export default class StringValueObject extends ValueObject<string>{
     constructor(value: string) {
+        super(value);
         this.ensureValueIsValid(value);
-        this.value = value;
     }
 
     ensureValueIsValid(value: string): void {

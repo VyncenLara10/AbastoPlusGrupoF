@@ -3,12 +3,14 @@ import StringValueObject from '../../../../shared/domain/value-objects/string-va
 export default class ProductName extends StringValueObject {
     constructor(value: string) {
         super(value);
+        this.ensureValueIsValid(value);
     }
 
     ensureValueIsValid(value: string): void {
         super.ensureValueIsValid(value);
-        if (value.length > 4) {
-            throw new Error(`${this.constructor.name} no puede tener más de 4 caracteres.`);
+        if (value.length < 10) {
+            throw new Error(`${this.constructor.name} no puede tener mmenos de 10 caracteres.`);
         }
     }
+
 }
