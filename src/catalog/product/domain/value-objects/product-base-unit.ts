@@ -13,4 +13,8 @@ export default class ProductBaseUnit extends EnumValueObject {
     constructor(value: string) {
         super(value, Object.values(BaseUnit));
     }
+
+    public getValue(): BaseUnit {
+        return this.value as BaseUnit;
+    }
 }

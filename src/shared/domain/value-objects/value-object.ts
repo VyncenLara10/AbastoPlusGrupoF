@@ -1,5 +1,5 @@
 export default class ValueObject<T> {
-    private value: T;
+    protected value: T;
 
     constructor(value: T) {
         this.value = value;
