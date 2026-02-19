@@ -6,7 +6,7 @@ export enum BaseUnit {
     GRAM = 'g',
     MILILITTER = 'ml',
     LITTER = 'lt',
-    UNIDAD = 'u'
+    UNIT = 'u'
 }
 
 export default class ProductBaseUnit extends EnumValueObject {
