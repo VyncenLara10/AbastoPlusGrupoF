@@ -19,12 +19,12 @@ async function Main() {
         console.error('Error en la validación de Value Objects:', (error as Error).message);
     }
 
-    console.log('\n--- Prueba de Error (Validacion) ---');
+    console.log('\nPrueba de Error (Validacion)');
     try {
         const invalidName = new ProductName(''); 
         console.log(invalidName);
     } catch (error) {
-        console.log('✅ La validacion funciono correctamente:', (error as Error).message);
+        console.log('La validacion funciono correctamente:', (error as Error).message);
     }
 }
 
