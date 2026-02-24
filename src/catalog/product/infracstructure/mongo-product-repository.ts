@@ -1,4 +1,5 @@
 import ProductRepository from "../application/product-repository";
+import Product from "../domain/product";
 
 export default class MongoProductRepository implements ProductRepository{
     async findAll(): Promise<any[]> {
@@ -9,7 +10,8 @@ export default class MongoProductRepository implements ProductRepository{
         return null;
     }
 
-    async save(data: any): Promise<void> {
+    async save(data: Product): Promise<void> {
+        
     }
 
     async delete(id: string): Promise<void> {
