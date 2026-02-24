@@ -1,6 +1,7 @@
 import ProductBaseUnit from "./value-objects/product-base-unit";
 import ProductId from "./value-objects/product-id";
 import ProductName from "./value-objects/product-name";
+import PresentationCreator from "./entities/presentation/presentation-creator";
 import ProductPresentation from './entities/presentation';
 
 export default class Product {
@@ -17,12 +18,10 @@ export default class Product {
     }
 
     public static build (id: string, name: string, baseUnit: string, presentations: Array<{id: string, name: string, type: string, netQuantity: number, unitOfMesure: string}>): Product {
-        const productPresentations: ProductPresentation[] = presentations.map(p => ProductPresentation.build(p.id, p.name, p.type, p.netQuantity, p.unitOfMesure));
-        return new Product(
-            new ProductId(id),
-            new ProductName(name),
-            new ProductBaseUnit(baseUnit),
-            productPresentations
-        );
+        const productId = new ProductId(id);
+        const productName = new ProductName(name);
+        const productBaseUnit = new ProductBaseUnit(baseUnit);
+        const productPresentations = PresentationCreator.createPresentations(presentations, []);
+        return new Product(productId, productName, productBaseUnit, productPresentations);
     }
 }
