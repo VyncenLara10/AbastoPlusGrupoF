@@ -10,6 +10,7 @@ export default class ProductPresentation {
     private readonly type: PresentationType;
     private readonly netQuantity: PresentationNetQuantity;
     private readonly unitOfMesure: PresentationUnitOfMesure;
+    presentationId: any;
 
     constructor(id: PresentationId, name: PresentationName, type: PresentationType, netQuantity: PresentationNetQuantity, unitOfMesure: PresentationUnitOfMesure) {
         this.id = id;

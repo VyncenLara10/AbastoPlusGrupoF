@@ -19,12 +19,13 @@ async function Main() {
         const name = new ProductName('Comida para gato');
         const unit = new ProductBaseUnit('Kg');
 
-        const productData = { 
-            id: id.getValue(), 
-            name: name.getValue(), 
-            unit: unit.getValue(),
-            price: 15.50 
-        };
+        const productData = {
+            productId: id,
+            productName: name,
+            productBaseUnit: unit,
+            productPresentations: [],
+            price: 15.50
+        } as unknown as Product;
 
         console.log('Guardando producto validado...');
         await repo.save(productData);

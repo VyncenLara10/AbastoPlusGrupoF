@@ -3,7 +3,7 @@ import Product from "../domain/product";
 import { MongoClient, Collection, ObjectId } from "mongodb";
 
 
-export class MongoProductRepository implements ProductRepository {
+export  default class MongoProductRepository implements ProductRepository {
     private collection: Collection;
 
     constructor(private readonly client: MongoClient) {
