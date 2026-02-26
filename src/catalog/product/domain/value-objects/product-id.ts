@@ -6,7 +6,7 @@ export default class ProductId extends IdentifierValueObject {
         super.ensureValueIsUvid(value);
     }
 
-    public getValue(): string {
-        return this.value
+    getValue(): string {
+        return this.getValue();
     }
 }

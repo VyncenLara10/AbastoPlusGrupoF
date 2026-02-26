@@ -12,7 +12,8 @@ export default class PresetnationName extends StringValueObject {
             throw new Error(`${this.constructor.name} no puede tener mmenos de 10 caracteres.`);
         }
     }
-    public getValue(): string {
-        return this.value;
+    
+    getValue(): string {
+        return this.getValue();
     }
 }

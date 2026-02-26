@@ -4,6 +4,19 @@ import ProductName from "./value-objects/product-name";
 import PresentationCreator from "./entities/presentation/presentation-creator";
 import ProductPresentation from './entities/presentation';
 
+export type ProductPrimitives = {
+  id: string;
+  name: string;
+  baseUnit: string;
+  presentations: {
+    id: string;
+    name: string;
+    type: string;
+    netQuantity: number;
+    unitOfMesure: string;
+  }[];
+};
+
 export default class Product {
     private readonly productId: ProductId;
     private readonly productName: ProductName;
@@ -23,5 +36,14 @@ export default class Product {
         const productBaseUnit = new ProductBaseUnit(baseUnit);
         const productPresentations = PresentationCreator.createPresentations(presentations, []);
         return new Product(productId, productName, productBaseUnit, productPresentations);
+    }
+
+    toPrimitives(): ProductPrimitives {
+        return {
+            id: this.productId.getValue(),
+            name: this.productName.getValue(),
+            baseUnit: this.productBaseUnit.getValue(),
+            presentations: this.productPresentations.map(p => p.toPrimitives())
+        };
     }
 }

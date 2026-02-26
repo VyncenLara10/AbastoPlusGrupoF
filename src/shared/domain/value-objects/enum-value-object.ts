@@ -14,4 +14,8 @@ export default class EnumValueObject extends ValueObject<string>{
             throw new Error(`Invalid value: ${value}. Valid values are: ${validValues.join(', ')}`);
         }
     }
+
+    getValue(): string {
+        return this.getValue();
+    }
 }

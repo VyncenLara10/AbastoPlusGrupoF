@@ -11,4 +11,8 @@ export default class StringValueObject extends ValueObject<string>{
             throw new Error(`${this.constructor.name} debe ser una cadena de texto valida y no estar vacia.`);
         }
     }
+
+    getValue(): string {
+        return this.getValue();
+    }
 }

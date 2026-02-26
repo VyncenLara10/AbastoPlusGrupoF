@@ -29,4 +29,14 @@ export default class ProductPresentation {
 
         return new ProductPresentation(presentationId, presentationName, presentationType, presentationNetQuantity, presentationUnitOfMeasure);
     }
+
+    toPrimitives() {
+        return {
+            id: this.id.getValue(),
+            name: this.name.getValue(),
+            type: this.type.getValue(),
+            netQuantity: parseInt(this.netQuantity.getValue()),
+            unitOfMesure: this.unitOfMesure.getValue()
+        };
+    }
 }

@@ -14,7 +14,7 @@ export default class ProductBaseUnit extends EnumValueObject {
         super(value, Object.values(BaseUnit));
     }
 
-    public getValue(): BaseUnit {
-        return this.value as BaseUnit;
+    getValue(): string {
+        return this.getValue();
     }
 }

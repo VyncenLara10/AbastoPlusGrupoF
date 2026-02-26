@@ -12,4 +12,8 @@ export default class IdentifierValueObject extends ValueObject<string> {
             throw new Error('Value must be a valid UVID');
         }
     }
+
+    getValue(): string {
+        return this.getValue();
+    }
 }

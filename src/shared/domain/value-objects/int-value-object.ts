@@ -11,4 +11,8 @@ export default class IntValueObject extends ValueObject<string>{
             throw new Error('Value must be an integer');
         }
     }
+
+    getValue(): string {
+        return this.getValue();
+    }
 }

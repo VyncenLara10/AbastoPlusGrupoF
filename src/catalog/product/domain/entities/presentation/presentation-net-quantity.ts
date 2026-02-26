@@ -16,7 +16,7 @@ export default class PresentationNetQuantity extends IntValueObject {
         }
     }
 
-    public getValue(): number {
-        return parseInt(this.value);
+    getValue(): string {
+        return this.getValue();
     }
 }

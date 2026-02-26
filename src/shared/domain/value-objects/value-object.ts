@@ -1,5 +1,5 @@
 export default class ValueObject<T> {
-    protected value: T;
+    private readonly value: T;
 
     constructor(value: T) {
         this.value = value;
@@ -7,5 +7,9 @@ export default class ValueObject<T> {
 
     toString(): string {
         return String(this.value);
+    }
+
+    getValue(): T {
+        return this.value;
     }
 }
