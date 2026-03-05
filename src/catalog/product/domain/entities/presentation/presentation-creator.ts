@@ -11,7 +11,7 @@ export default class PresentationCreator {
         return presentations.length <= 5;
     }
 
-    public static createPresentations(presentationsData: Array<{id: string, name: string, type: string, netQuantity: number, unitOfMesure: string}>, presentations: ProductPresentation[]): ProductPresentation[] {
+    public static createPresentations(presentationsData: Array<{id: string, name: string, type: string, netQuantity: number, unitOfMesure: string}>, presentations: ProductPresentation[] = []): ProductPresentation[] {
         if (!PresentationCreator.max5Presentations(presentations)) {
             throw new Error('A product cannot have more than 5 presentations.');
         }

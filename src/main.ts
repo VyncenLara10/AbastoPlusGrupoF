@@ -2,11 +2,11 @@ import "reflect-metadata";
 import container from "./container/container";
 import TYPES from "./container/types";
 import MongoProductRepository from "./catalog/product/infracstructure/mongo-product-repository";
-
 import ProductId from './catalog/product/domain/value-objects/product-id';
 import ProductName from './catalog/product/domain/value-objects/product-name';
 import ProductBaseUnit from './catalog/product/domain/value-objects/product-base-unit';
 import Product from './catalog/product/domain/product';
+import PresentationCreator from "./catalog/product/domain/entities/presentation/presentation-creator";
 
 async function Main() {
 
@@ -22,7 +22,7 @@ async function Main() {
     productId: id,
     productName: name,
     productBaseUnit: unit,
-    productPresentations: [
+    productPresentations: PresentationCreator.createPresentations([
       {
         id: "p1",
         name: "Bolsa pequeña",
@@ -44,8 +44,7 @@ async function Main() {
         netQuantity: 10,
         unitOfMesure: "Kg"
       }
-    ],
-    price: 15.50
+    ])
   } as unknown as Product;
 
   await repo.save(productData);
