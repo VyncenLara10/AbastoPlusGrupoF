@@ -8,13 +8,13 @@ export type ProductPrimitives = {
   id: string;
   name: string;
   baseUnit: string;
-  presentations: {
+  presentations: Array<{
     id: string;
     name: string;
     type: string;
     netQuantity: number;
     unitOfMesure: string;
-  }[];
+  }>;
 };
 
 export default class Product {

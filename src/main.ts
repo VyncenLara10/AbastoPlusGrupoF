@@ -7,6 +7,7 @@ import ProductName from './catalog/product/domain/value-objects/product-name';
 import ProductBaseUnit from './catalog/product/domain/value-objects/product-base-unit';
 import Product from './catalog/product/domain/product';
 import PresentationCreator from "./catalog/product/domain/entities/presentation/presentation-creator";
+import SaveProduct from "./catalog/product/application/use-cases/save-product";
 
 async function Main() {
 
@@ -14,15 +15,10 @@ async function Main() {
 
   const repo = container.get<MongoProductRepository>(TYPES.ProductRepository);
 
-  const id = new ProductId("507f1f77bcf86cd799439011");
-  const name = new ProductName("Comida para gato");
-  const unit = new ProductBaseUnit("kg");
-
-  const productData = {
-    productId: id,
-    productName: name,
-    productBaseUnit: unit,
-    productPresentations: PresentationCreator.createPresentations([
+  const id = "507f1f77bcf86cd799439011";
+  const name = "Comida para gato";
+  const unit = "kg";
+  const productPresentations = [
       {
         id: "p1",
         name: "Bolsa pequeña",
@@ -44,10 +40,14 @@ async function Main() {
         netQuantity: 10,
         unitOfMesure: "Kg"
       }
-    ])
-  } as unknown as Product;
-
-  await repo.save(productData);
+    ];
+  const guardar = new SaveProduct(repo);
+  await guardar.execute({
+    id: id,
+    name: name,
+    baseUnit: unit,
+    presentations: productPresentations
+  });
 
   const allProducts = await repo.findAll();
   console.log(allProducts);
