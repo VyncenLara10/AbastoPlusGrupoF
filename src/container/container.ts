@@ -2,7 +2,7 @@ import { Container } from "inversify";
 import { MongoClient } from "mongodb";
 
 import TYPES from "./types";
-import MongoProductRepository from "../catalog/product/infracstructure/mongo-product-repository";
+import MongoProductRepository from "../catalog/product/infrastructure/mongo-product-repository";
 import ProductRepository from "../catalog/product/application/product-repository";
 
 const container = new Container();

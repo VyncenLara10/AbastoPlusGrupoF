@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import container from "./container/container";
 import TYPES from "./container/types";
-import MongoProductRepository from "./catalog/product/infracstructure/mongo-product-repository";
+import MongoProductRepository from "./catalog/product/infrastructure/mongo-product-repository";
 import ProductId from './catalog/product/domain/value-objects/product-id';
 import ProductName from './catalog/product/domain/value-objects/product-name';
 import ProductBaseUnit from './catalog/product/domain/value-objects/product-base-unit';
