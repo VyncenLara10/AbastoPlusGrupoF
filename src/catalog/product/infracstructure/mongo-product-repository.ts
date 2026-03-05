@@ -1,17 +1,24 @@
-import ProductRepository from "../application/product-repository";
-import Product from "../domain/product";
+import { injectable, inject } from "inversify";
 import { MongoClient, Collection, ObjectId } from "mongodb";
 
+import ProductRepository from "../application/product-repository";
+import Product from "../domain/product";
+import TYPES from "../../../container/types";
 
-export  default class MongoProductRepository implements ProductRepository {
+@injectable()
+export default class MongoProductRepository implements ProductRepository {
+
     private collection: Collection;
 
-    constructor(private readonly client: MongoClient) {
+    constructor(
+        @inject(TYPES.MongoClient)
+        private readonly client: MongoClient
+    ) {
         this.collection = this.client.db("mydb").collection("products");
     }
 
-    delete(id: string): Promise<void> {
-        throw new Error("Method not implemented.");
+    async delete(id: string): Promise<void> {
+        await this.collection.deleteOne({ _id: new ObjectId(id) });
     }
 
     async findAll(): Promise<Product[]> {
@@ -25,35 +32,49 @@ export  default class MongoProductRepository implements ProductRepository {
     }
 
     async save(product: Product): Promise<void> {
+
         const productAny = product as any;
+
         const doc: any = {
-        _id: productAny.productId?.value ? new ObjectId(productAny.productId.value) : undefined,
-        name: productAny.productName?.value,
-        baseUnit: productAny.productBaseUnit?.value,
-        presentations: (productAny.productPresentations || []).map((p: any) => ({
-        id: p.presentationId?.value,
-        name: p.presentationName?.value,
-        type: p.presentationType?.value,
-        netQuantity: p.presentationNetQuantity?.value,
-        unitOfMesure: p.presentationUnitOfMesure?.value
-        }))
+            _id: productAny.productId?.value
+                ? new ObjectId(productAny.productId.value)
+                : new ObjectId(),
+
+            name: productAny.productName?.value,
+            baseUnit: productAny.productBaseUnit?.value,
+
+            presentations: (productAny.productPresentations || []).map((p: any) => ({
+                id: p.presentationId?.value,
+                name: p.presentationName?.value,
+                type: p.presentationType?.value,
+                netQuantity: p.presentationNetQuantity?.value,
+                unitOfMesure: p.presentationUnitOfMesure?.value
+            }))
         };
-        await this.collection.updateOne({ _id: doc._id }, { $set: doc }, { upsert: true });
+
+        await this.collection.updateOne(
+            { _id: doc._id },
+            { $set: doc },
+            { upsert: true }
+        );
     }
 
     private toProduct(doc: any): Product {
+
         const product: any = {
-        productId: { value: doc._id ? doc._id.toString() : undefined },
-        productName: { value: doc.name },
-        productBaseUnit: { value: doc.baseUnit },
-        productPresentations: (doc.presentations || []).map((p: any) => ({
-        presentationId: { value: p.id },
-        presentationName: { value: p.name },
-        presentationType: { value: p.type },
-        presentationNetQuantity: { value: p.netQuantity },
-        presentationUnitOfMesure: { value: p.unitOfMesure }
-        }))
+            productId: { value: doc._id?.toString() },
+            productName: { value: doc.name },
+            productBaseUnit: { value: doc.baseUnit },
+
+            productPresentations: (doc.presentations || []).map((p: any) => ({
+                presentationId: { value: p.id },
+                presentationName: { value: p.name },
+                presentationType: { value: p.type },
+                presentationNetQuantity: { value: p.netQuantity },
+                presentationUnitOfMesure: { value: p.unitOfMesure }
+            }))
         };
+
         return product as Product;
     }
 }
