@@ -6,6 +6,10 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
 
+    /* Decoradores (necesario para Inversify) */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
     /* Interoperabilidad */
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

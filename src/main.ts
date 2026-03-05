@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { MongoClient } from 'mongodb';
 import ProductId from './catalog/product/domain/value-objects/product-id';
 import ProductName from './catalog/product/domain/value-objects/product-name';
@@ -15,7 +16,7 @@ async function Main() {
         console.log('Conectado a MongoDB');
 
         const repo = new MongoProductRepository(client);
-        const id = new ProductId('558-552-665');
+        const id = new ProductId('558552665');
         const name = new ProductName('Comida para gato');
         const unit = new ProductBaseUnit('Kg');
 
