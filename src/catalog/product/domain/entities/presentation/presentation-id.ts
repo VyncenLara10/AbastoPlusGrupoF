@@ -3,7 +3,7 @@ import IdentifierValueObject from '../../../../../shared/domain/value-objects/id
 export default class PresentationId  extends IdentifierValueObject {
     constructor(value: string) {
         super(value);
-        super.ensureValueIsUvid(value);
+        super.ensureValueIsUUID(value);
     }
 
     getValue(): string {

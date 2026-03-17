@@ -3,10 +3,9 @@ import IdentifierValueObject from '../../../../shared/domain/value-objects/ident
 export default class ProductId extends IdentifierValueObject {
     constructor(value: string) {
         super(value);
-        super.ensureValueIsUvid(value);
     }
 
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }
