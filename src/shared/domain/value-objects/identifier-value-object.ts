@@ -19,6 +19,6 @@ export default class IdentifierValueObject extends ValueObject<string> {
     }
 
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }
