@@ -1,11 +1,13 @@
 import ProductRepository from "../product-repository";
 import Product, { ProductPrimitives } from "../../domain/product";
+import { EventBus } from "../../../../shared/domain/event-bus";
+import { ProductCreatedEvent } from "../../domain/product-created.event";
 
 export default class SaveProduct {
-    private readonly productRepository: ProductRepository;
-    constructor(productRepository: ProductRepository) {
-        this.productRepository = productRepository;
-    }
+    constructor(
+        private readonly productRepository: ProductRepository,
+        private readonly eventBus: EventBus,
+    ) {}
 
     async execute(product: ProductPrimitives): Promise<void> {
         const productEntity = Product.build(
@@ -14,6 +16,15 @@ export default class SaveProduct {
             product.baseUnit,
             product.presentations
         );
+
         await this.productRepository.save(productEntity);
+
+        await this.eventBus.publish([
+            new ProductCreatedEvent(
+                product.id,
+                product.name,
+                product.baseUnit
+            )
+        ]);
     }
 }
