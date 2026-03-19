@@ -20,12 +20,12 @@ async function main() {
     const saveProduct = new SaveProduct(productRepository, eventBus);
 
     eventBus.subscribe("catalog.product.created", {
-    handle: async (event) => {
-        console.log("Evento recibido:", event.eventName);
-        console.log("aggregateId:", event.aggregateId);
-        console.log("payload:", event.payload);
-        console.log("occurredOn:", event.occurredOn);
-      }
+        handle: async (event) => {
+            console.log("Evento recibido:", event.eventName);
+            console.log("aggregateId:", event.aggregateId);
+            console.log("payload:", event.payload);
+            console.log("occurredOn:", event.occurredOn);
+        }
     });
 
     await saveProduct.execute({
@@ -42,6 +42,8 @@ async function main() {
             },
         ],
     });
+
+    await eventBus.dispatch();
 
     console.log("Producto guardado y evento publicado");
     await client.close();
