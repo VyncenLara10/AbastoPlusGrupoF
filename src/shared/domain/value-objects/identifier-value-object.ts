@@ -9,9 +9,9 @@ export default class IdentifierValueObject extends ValueObject<string> {
     }   
 
     public ensureValueIsUUID(value: string): void {
-        ObjectId.createFromHexString(value);
-        if (!ObjectId.isValid(value)) {
-            throw new Error(`Invalid identifier: ${value}`);
+        const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (!uuidRegex.test(value)) {
+            throw new Error(`Invalid UUID format: ${value}`);
         }
     }
 

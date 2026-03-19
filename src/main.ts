@@ -29,12 +29,12 @@ async function main() {
     });
 
     await saveProduct.execute({
-        id: "1",
+        id: "550e8401-e29b-41d4-a716-446655440000",
         name: "Producto de prueba",
         baseUnit: "unidad",
         presentations: [
             {
-                id: "1",
+                id: "550e8401-e29b-41d4-a716-446655441000",
                 name: "Presentación 1",
                 type: "caja",
                 netQuantity: 10,
