@@ -1,30 +1,50 @@
 import "reflect-metadata";
-import container from "./container/container";
+import { MongoClient } from "mongodb";
+import { Container } from "inversify";
 import TYPES from "./container/types";
-
+import MongoProductRepository from "./catalog/product/infrastructure/mongo-product-repository";
+import { InMemoryEventBus } from "./catalog/product/infrastructure/in-memory-event-bus";
 import SaveProduct from "./catalog/product/application/use-cases/save-product";
 
-async function Main() {
+async function main() {
+    const client = new MongoClient("mongodb://localhost:27017");
+    await client.connect();
 
-  console.log("Iniciando pruebas");
+    const container = new Container();
+    container.bind<MongoClient>(TYPES.MongoClient).toConstantValue(client);
+    container.bind<MongoProductRepository>(TYPES.ProductRepository).to(MongoProductRepository);
 
-  const saveProduct = container.get<SaveProduct>(TYPES.SaveProduct);
+    const productRepository = container.get<MongoProductRepository>(TYPES.ProductRepository);
+    const eventBus = new InMemoryEventBus();
 
-  await saveProduct.execute({
-      id: "507f1f77bcf86cd799439011",
-      name: "Comida para gato",
-      baseUnit: "kg",
-      presentations: [
-        {
-          id: "p1",
-          name: "Bolsa pequeña",
-          type: "Bolsa",
-          netQuantity: 1,
-          unitOfMesure: "Kg"
-        }
-      ]
-  });
+    const saveProduct = new SaveProduct(productRepository, eventBus);
 
+    eventBus.subscribe("catalog.product.created", {
+    handle: async (event) => {
+        console.log("Evento recibido:", event.eventName);
+        console.log("aggregateId:", event.aggregateId);
+        console.log("payload:", event.payload);
+        console.log("occurredOn:", event.occurredOn);
+      }
+    });
+
+    await saveProduct.execute({
+        id: "1",
+        name: "Producto de prueba",
+        baseUnit: "unidad",
+        presentations: [
+            {
+                id: "1",
+                name: "Presentación 1",
+                type: "caja",
+                netQuantity: 10,
+                unitOfMesure: "kg",
+            },
+        ],
+    });
+
+    console.log("Producto guardado y evento publicado");
+    await client.close();
 }
 
-Main();
+main();

@@ -1,20 +1,17 @@
-export interface DomainEventPrimitives {
-  eventName: string;
-  aggregateId: string;
-  occurredOn: Date;
-  attributes: Record<string, unknown>;
-}
-
-export abstract class DomainEvent {
+export abstract class DomainEvent<T extends Record<string, unknown> = Record<string, unknown>> {
   readonly eventName: string;
   readonly aggregateId: string;
   readonly occurredOn: Date;
+  readonly payload: T;
 
-  constructor(params: { eventName: string; aggregateId: string }) {
-    this.eventName     = params.eventName;
-    this.aggregateId   = params.aggregateId;
-    this.occurredOn    = new Date();
+  constructor(params: {
+    eventName: string;
+    aggregateId: string;
+    payload: T;
+  }) {
+    this.eventName   = params.eventName;
+    this.aggregateId = params.aggregateId;
+    this.occurredOn  = new Date();
+    this.payload     = params.payload;
   }
-
-  abstract toPrimitives(): DomainEventPrimitives;
 }

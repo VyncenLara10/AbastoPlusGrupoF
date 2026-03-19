@@ -1,25 +1,18 @@
-import { DomainEvent, DomainEventPrimitives } from '../../../shared/domain/event';
+import { DomainEvent } from '../../../shared/domain/event';
 
-export class ProductCreatedEvent extends DomainEvent {
+type ProductCreatedPayload = {
+  name: string;
+  baseUnit: string;
+};
+
+export class ProductCreatedEvent extends DomainEvent<ProductCreatedPayload> {
   static readonly EVENT_NAME = 'catalog.product.created';
 
-  constructor(
-    aggregateId: string,
-    public readonly name: string,
-    public readonly baseUnit: string,
-  ) {
-    super({ eventName: ProductCreatedEvent.EVENT_NAME, aggregateId });
-  }
-
-  toPrimitives(): DomainEventPrimitives {
-    return {
-      eventName:   this.eventName,
-      aggregateId: this.aggregateId,
-      occurredOn:  this.occurredOn,
-      attributes: {
-        name:  this.name,
-        baseUnit: this.baseUnit,
-      },
-    };
+  constructor(aggregateId: string, payload: ProductCreatedPayload) {
+    super({
+      eventName: ProductCreatedEvent.EVENT_NAME,
+      aggregateId,
+      payload,
+    });
   }
 }

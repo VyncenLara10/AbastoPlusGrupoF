@@ -20,11 +20,10 @@ export default class SaveProduct {
         await this.productRepository.save(productEntity);
 
         await this.eventBus.publish([
-            new ProductCreatedEvent(
-                product.id,
-                product.name,
-                product.baseUnit
-            )
+            new ProductCreatedEvent(product.id, {
+                name:     product.name,
+                baseUnit: product.baseUnit,
+            })
         ]);
     }
 }
