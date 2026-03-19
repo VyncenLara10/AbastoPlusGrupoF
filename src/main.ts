@@ -31,12 +31,12 @@ async function main() {
     await saveProduct.execute({
         id: "550e8401-e29b-41d4-a716-446655440000",
         name: "Producto de prueba",
-        baseUnit: "unidad",
+        baseUnit: "kg",
         presentations: [
             {
                 id: "550e8401-e29b-41d4-a716-446655441000",
                 name: "Presentación 1",
-                type: "caja",
+                type: "box",
                 netQuantity: 10,
                 unitOfMesure: "kg",
             },

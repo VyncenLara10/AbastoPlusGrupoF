@@ -36,10 +36,7 @@ export default class MongoProductRepository implements ProductRepository {
         const productAny = product as any;
 
         const doc: any = {
-            _id: productAny.productId?.value
-                ? new ObjectId(productAny.productId.value)
-                : new ObjectId(),
-
+            _id: productAny.productId?.value,
             name: productAny.productName?.value,
             baseUnit: productAny.productBaseUnit?.value,
 
