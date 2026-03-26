@@ -6,7 +6,11 @@ const TYPES = {
 
     TranslationService: Symbol.for("TranslationService"),
 
-    SaveProduct: Symbol.for("SaveProduct")
+    EventBus: Symbol.for("EventBus"),
+
+    SaveProduct: Symbol.for("SaveProduct"),
+
+    TranslateName: Symbol.for("TranslateName"),
 
 };
 
