@@ -43,6 +43,22 @@ async function main() {
         ],
     });
 
+    await saveProduct.execute({
+        id: "550e8401-e29b-41d4-a716-446655440010",
+        name: "Producto de prueba2",
+        baseUnit: "lb",
+        presentations: [
+            {
+                id: "550e8401-e29b-41d4-a716-446655441000",
+                name: "Presentación 2",
+                type: "box",
+                netQuantity: 50,
+                unitOfMesure: "lb",
+            },
+        ],
+    });
+    
+
     await eventBus.dispatch();
 
     console.log("Producto guardado y evento publicado");

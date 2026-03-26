@@ -7,6 +7,6 @@ export default class PresentationId  extends IdentifierValueObject {
     }
 
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }

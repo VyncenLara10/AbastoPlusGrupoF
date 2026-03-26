@@ -14,12 +14,14 @@ export class InMemoryEventBus implements EventBus {
     this.queue.push(...events);
   }
 
-  async dispatch(): Promise<void> {
-    while (this.queue.length > 0) {
+  async dispatch(limit: number = 10): Promise<void> {
+    let count = 0;
+    while (this.queue.length > 0 && count < limit) {
       const event = this.queue.shift()!;
 
       const handlers = this.handlers.get(event.eventName) ?? [];
       await Promise.all(handlers.map(h => h.handle(event)));
+      count++;
     }
   }
 }

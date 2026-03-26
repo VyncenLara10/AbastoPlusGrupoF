@@ -14,6 +14,6 @@ export default class PresetnationName extends StringValueObject {
     }
     
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }

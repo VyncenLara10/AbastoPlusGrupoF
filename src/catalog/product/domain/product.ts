@@ -34,7 +34,9 @@ export default class Product {
         const productId = new ProductId(id);
         const productName = new ProductName(name);
         const productBaseUnit = new ProductBaseUnit(baseUnit);
+        console.log(presentations)
         const productPresentations = PresentationCreator.createPresentations(presentations, []);
+        console.log(productPresentations)
         return new Product(productId, productName, productBaseUnit, productPresentations);
     }
 

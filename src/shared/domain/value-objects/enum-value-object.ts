@@ -16,6 +16,6 @@ export default class EnumValueObject extends ValueObject<string>{
     }
 
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }

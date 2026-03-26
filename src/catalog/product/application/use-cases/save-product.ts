@@ -10,6 +10,7 @@ export default class SaveProduct {
     ) {}
 
     async execute(product: ProductPrimitives): Promise<void> {
+        console.log(product.presentations)
         const productEntity = Product.build(
             product.id,
             product.name,

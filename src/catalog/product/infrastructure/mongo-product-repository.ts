@@ -32,22 +32,23 @@ export default class MongoProductRepository implements ProductRepository {
     }
 
     async save(product: Product): Promise<void> {
-
-        const productAny = product as any;
-
+        const primitivesproduct = product.toPrimitives()
         const doc: any = {
-            _id: productAny.productId?.value,
-            name: productAny.productName?.value,
-            baseUnit: productAny.productBaseUnit?.value,
+            _id: primitivesproduct.id,
+            name: primitivesproduct.name,
+            baseUnit: primitivesproduct.baseUnit,
 
-            presentations: (productAny.productPresentations || []).map((p: any) => ({
-                id: p.presentationId?.value,
-                name: p.presentationName?.value,
-                type: p.presentationType?.value,
-                netQuantity: p.presentationNetQuantity?.value,
-                unitOfMesure: p.presentationUnitOfMesure?.value
+            presentations: (primitivesproduct.presentations || []).map((p: any) => ({
+                id: p.id,
+                name: p.name,
+                type: p.type,
+                netQuantity: p.netQuantity,
+                unitOfMesure: p.unitOfMesure
             }))
+            
         };
+        console.log(doc.presentations, doc.presentations.type, 'doc')
+
 
         await this.collection.updateOne(
             { _id: doc._id },

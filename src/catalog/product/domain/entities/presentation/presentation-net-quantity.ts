@@ -17,6 +17,6 @@ export default class PresentationNetQuantity extends IntValueObject {
     }
 
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }

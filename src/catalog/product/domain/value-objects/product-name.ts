@@ -13,6 +13,6 @@ export default class ProductName extends StringValueObject {
         }
     }
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }

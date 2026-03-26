@@ -13,6 +13,6 @@ export default class StringValueObject extends ValueObject<string>{
     }
 
     getValue(): string {
-        return this.getValue();
+        return super.getValue();
     }
 }
